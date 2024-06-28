@@ -192,7 +192,7 @@ parameters:
 #### モデルパラメータ
 |model|Model Size|Score|Embed長|GPU Mem|処理速度|
 |:----|:----|:----|:----|:----|:----|
-|intfloat/multilingual-e5-small|0.5B|0.766|384|0.7MB|24|
+|intfloat/multilingual-e5-small|0.5B|0.766|384|0.7GB|24|
 |intfloat/multilingual-e5-base|1.1B|0.754|768|1.4GB|48|
 |intfloat/multilingual-e5-large|2.3B|0.757|1024|2.4GB|139|
 > - Scoreは[客観的Embeddings評価](https://github.com/okitalabs/Embeddings)による計測。
