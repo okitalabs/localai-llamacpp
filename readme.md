@@ -5,7 +5,7 @@ gpt-3.5-turbo、text-embedding-ada-002が使用可能なOpenAI API互換サー�
 ### 実行方針	
 - LocalAIのllamacppは使わない（レスポンスがちょっとおかしくなる事象があるため）
 - LLMの実行はllama-server(LLaMA.cpp HTTP Server)を使用する
-- LLMのモデルは、Llama-3-ELYZA-JP-8B-Q8_0.ggufを使用する（精度が高くモデルサイズが小さいため）
+- LLMのモデルは、Llama-3-ELYZA-JP-8B-Q8_0.ggufを使用する（精度が高くモデルサイズが小さいため、ただし最大コンテキスト長は512token、日本語512文字で400token前後）
 - EmbeddingsはSentenceBERT(multilingual-e5-small)をLocalAIのSentenceTransformerで実行する（精度が高くEmbedサイズが小さいため）
 - llama-serverのコンパイルはentrypoint.shで行う（docker buildでコンパイルすると実行時に ggml-cuda.cu was compiled for: 520 エラーになるため）
 - endpointの一元化にLiteLLM Proxyを使用する
@@ -161,6 +161,19 @@ exec llama-server \
  :
 ```
 
+#### モデルパラメータ
+llama-serverのオプション指標。
+
+|model|Model Size|chat-template|ctx-size|n-gpu-layers|GPU Mem|URL|
+|:----|:----|:----|:----|:----|:----|:----|
+|DataPilot-ArrowPro-7B-KUJIRA-Q8_0.gguf|7B|mistral|4096|33|8GB|[mmnga/DataPilot-ArrowPro-7B-KUJIRA-gguf](https://huggingface.co/mmnga/DataPilot-ArrowPro-7B-KUJIRA-gguf)|
+|Llama-3-ELYZA-JP-8B.Q8_0.gguf|8B|llama3|8192|33|8GB|[mmnga/Llama-3-ELYZA-JP-8B-gguf](https://huggingface.co/mmnga/Llama-3-ELYZA-JP-8B-gguf)|
+|vicuna-13b-v1.5.Q8_0.gguf|13B|vicuna|4096|41|14GB|[TheBloke/vicuna-13B-v1.5-GGUF](https://huggingface.co/TheBloke/vicuna-13B-v1.5-GGUF)|
+|karakuri-lm-8x7b-instruct-v0.1-Q6_K.gguf|47B|mistral|32768|33|37GB|[ReadyON/karakuri-lm-8x7b-instruct-v0.1-gguf](https://huggingface.co/ReadyON/karakuri-lm-8x7b-instruct-v0.1-gguf)|
+|karakuri-lm-70b-chat-v0.1-q4_K_M.gguf|70B|llama2|4096|81|40GB|[mmnga/karakuri-lm-70b-chat-v0.1-gguf](https://huggingface.co/mmnga/karakuri-lm-70b-chat-v0.1-gguf)|
+
+> - GPUメモリは起動時の最低消費量。コンテキスト長により増加する。
+
 ### Embeddingsの変更
 - `models/`にモデル実行を定義したyamlファイルを配置する。
 - ファイル名はアクセスする時のモデル名 + .yaml
@@ -175,6 +188,16 @@ embeddings: true
 parameters:
   model: intfloat/multilingual-e5-large
 ```
+
+#### モデルパラメータ
+|model|Model Size|Score|Embed長|GPU Mem|処理速度|
+|:----|:----|:----|:----|:----|:----|
+|multilingual-e5-small|0.5B|0.766|384|662|24|
+|multilingual-e5-base|1.1B|0.754|768|1316|48|
+|multilingual-e5-large|2.3B|0.757|1024|2370|139|
+> - Scoreは[客観的Embeddings評価](https://github.com/okitalabs/Embeddings)による計測。
+> - Embed長はEmbeddingsのベクトル長
+> - 処理速度は512文字、2700件をHuggingFaceEmbeddingsで1件ずつ処理した時の秒数
 
 ### Entrypointの変更
 - エントリポイントはLiteLLM Proxyで一元化している。

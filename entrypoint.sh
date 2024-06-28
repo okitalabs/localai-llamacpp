@@ -76,8 +76,8 @@ cp $LLAMACPP_DIR/llama-server /usr/local/bin
 exec llama-server \
 --model /build/models/Llama-3-ELYZA-JP-8B.Q8_0.gguf \
 --chat-template llama3 \
---ctx-size 4096 \
---n-gpu-layers 40 \
+--ctx-size 8192 \
+--n-gpu-layers 33 \
 --parallel 8 \
 --threads-batch 8 \
 --threads-http 8 \
