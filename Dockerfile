@@ -12,10 +12,3 @@ RUN apt update && apt install -y vim git build-essential libcurl4-openssl-dev
 
 ## LiteLLM Proxy
 RUN pip install 'litellm[proxy]'
-
-## FastChat
-#FASTCHAT_DIR=$HOME_DIR/FastChat
-#if [ ! -d FASTCHAT_DIR ]; then
-#  cd $HOME_DIR &&  git clone https://github.com/lm-sys/FastChat.git
-#fi
-#cd $FASTCHAT_DIR && pip3 install -e .
