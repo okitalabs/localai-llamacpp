@@ -1,0 +1,5 @@
+name: multilingual-e5-large
+backend: sentencetransformers
+embeddings: true
+parameters:
+  model: intfloat/multilingual-e5-large
