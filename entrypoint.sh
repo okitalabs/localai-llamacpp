@@ -61,12 +61,11 @@ exec ./local-ai > $HOME_DIR/logs/localai.log 2>&1 &
 ## $LLAMACPP_DIR/llama-serverが無ければmakeして/usr/local/binにコピー
 LLAMACPP_DIR=$HOME_DIR/llama.cpp
 
-#if [ ! -d LLAMACPP_DIR ]; then
-#  cd $HOME_DIR &&  git clone https://github.com/ggerganov/llama.cpp.git
-#fi
 if [ ! -e  $LLAMACPP_DIR/llama-server ]; then
-  apt update && apt install -y build-essential libcurl4-openssl-dev vim
-  cd $HOME_DIR &&  git clone https://github.com/ggerganov/llama.cpp.git
+  if [ ! -d $LLAMACPP_DIR ]; then
+    echo "hoge"
+    cd $HOME_DIR &&  git clone https://github.com/ggerganov/llama.cpp.git
+  fi
   cd $LLAMACPP_DIR && LLAMA_CUDA=1 LLAMA_CURL=1 make llama-server
 fi
 

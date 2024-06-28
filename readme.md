@@ -50,7 +50,7 @@ Docker内実行エンジン
 ### 1.実行環境のインストール
 GitHubのリポジトリを`/home/users/localai-llamacpp`に配置し、shellに実行権限を付ける。
 ```
-git clone xxx
+git clone https://github.com/okitalabs/localai-llamacpp.git
 cp localai-llamacpp /home/users/
 chmod +x /home/users/localai-llamacpp/*.sh
 ```
@@ -59,7 +59,7 @@ chmod +x /home/users/localai-llamacpp/*.sh
 `Llama-3-ELYZA-JP-8B-Q8_0.gguf`を`models/`にダウンロードする。
 ```
 cd /home/users/localai-llamacpp/models
-wget https://huggingface.co/mmnga/Llama-3-ELYZA-JP-8B-gguf/blob/main/Llama-3-ELYZA-JP-8B-Q8_0.gguf
+wget https://huggingface.co/mmnga/Llama-3-ELYZA-JP-8B-gguf/resolve/main/Llama-3-ELYZA-JP-8B-Q8_0.gguf
 ```
 
 ### 3. Dockerイメージの作成
@@ -136,6 +136,7 @@ input: "query: 夕飯はお肉です。"
 ### Text/Chat Completionの変更
 - GGUF形式のモデルファイルを`models/`以下にダウンロード。
 - `entrypoint.sh`で起動しているllama-serverの設定を変更する。
+- Dockerコンテナ内のモデルファイルは`/build/models`に配置される。
 - dockerを再起動する。
 
 ```
@@ -209,7 +210,7 @@ model_list:
 ```
 $ cd /home/users/localai-llamacpp
 $ ls logs
-
+litellm.log  llamacpp.log  localai.log
 ```
 
 
