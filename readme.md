@@ -111,8 +111,8 @@ curl http://localhost:28000/v1/embeddings \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer None" \
 -d '{
-"model": "text-embedding-ada-002",
-"input": "query: 夕飯はお肉です。"
+  "model": "text-embedding-ada-002",
+  "input": "query: 夕飯はお肉です。"
 }' 
 ```
 > - 初回アクセス時はモデルをダンロードするので時間がかかる。
