@@ -228,7 +228,7 @@ model_list:
 ## ログ
 `logs/`以下に、localai, llama-server, litellmのログが作成されている。ファイルがどんどん大きくなるので注意。  
 - ログを出力しない場合、`entrypoint.sh`のリダイレクト先を`/dev/null`に変更する。
-- `litellm.log`に、APIのRequest, Responseが記録されるのでやり取りしている内容の確認に便利
+- `litellm.log`に、APIのRequest, Responseが記録されるのでやり取りしている内容の確認に便利。
 
 ```
 $ cd /home/users/localai-llamacpp
