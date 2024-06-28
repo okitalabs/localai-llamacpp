@@ -192,9 +192,9 @@ parameters:
 #### モデルパラメータ
 |model|Model Size|Score|Embed長|GPU Mem|処理速度|
 |:----|:----|:----|:----|:----|:----|
-|multilingual-e5-small|0.5B|0.766|384|662|24|
-|multilingual-e5-base|1.1B|0.754|768|1316|48|
-|multilingual-e5-large|2.3B|0.757|1024|2370|139|
+|intfloat/multilingual-e5-small|0.5B|0.766|384|662|24|
+|intfloat/multilingual-e5-base|1.1B|0.754|768|1316|48|
+|intfloat/multilingual-e5-large|2.3B|0.757|1024|2370|139|
 > - Scoreは[客観的Embeddings評価](https://github.com/okitalabs/Embeddings)による計測。
 > - Embed長はEmbeddingsのベクトル長
 > - 処理速度は512文字、2700件をHuggingFaceEmbeddingsで1件ずつ処理した時の秒数
