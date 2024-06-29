@@ -5,8 +5,8 @@ gpt-3.5-turbo、text-embedding-ada-002が使用可能なOpenAI API互換サー�
 ### 実行方針	
 - LocalAIのllamacppは使わない（レスポンスがちょっとおかしくなる事象があるため）
 - LLMの実行はllama-server(LLaMA.cpp HTTP Server)を使用する
-- LLMのモデルは、Llama-3-ELYZA-JP-8B-Q8_0.ggufを使用する（精度が高くモデルサイズが小さいため、ただし最大コンテキスト長は512token、日本語512文字で400token前後）
-- EmbeddingsはSentenceBERT(multilingual-e5-small)をLocalAIのSentenceTransformerで実行する（精度が高くEmbedサイズが小さいため）
+- LLMのモデルは、Llama-3-ELYZA-JP-8B-Q8_0.ggufを使用する（精度が高くモデルサイズが小さいため）
+- EmbeddingsはSentenceBERT(multilingual-e5-small)をLocalAIのSentenceTransformerで実行する（精度がそこそこ高く、モデルサイズが小さく高速で、Embedサイズが小さいため、ただし最大コンテキスト長は512tokenの制限がある。ちなみに、日本語512文字で400token前後）
 - llama-serverのコンパイルはentrypoint.shで行う（docker buildでコンパイルすると実行時に ggml-cuda.cu was compiled for: 520 エラーになるため）
 - endpointの一元化にLiteLLM Proxyを使用する
 - GPUを使用する（例ではP40/24GB x3台）
