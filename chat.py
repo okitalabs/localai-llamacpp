@@ -12,9 +12,9 @@ api_key = 'Dummy' ## Dummy Key 何でも良い
 model = 'gpt-3.5-turbo' ## LLM Model Name: gpt-3.5-turbo, text-davinci-003
 
 system = 'あなた日本語の優秀なアシスタントです。'
-max_tokens = 1024 ## 生成するトークンの最大数
-temperature = 0.0 ## 0～2 直が高いほど多様性が高まる（確率の低い値も選択範囲に入る）
-top_p = 0.0 ## 0～1 確率が高い順に上位何%を選択範囲に入れるか
+max_tokens = 4095 ## 生成するトークンの最大数
+temperature = 0.9 ## 0～2 直が高いほど多様性が高まる（確率の低い値も選択範囲に入る）
+top_p = 0.9 ## 0～1 確率が高い順に上位何%を選択範囲に入れるか
 frequency_penalty = 0.0 ## -2～2 モデルが同じ行を逐語的に繰り返す可能性を低下させる
 presence_penalty = 0.0 ## -2～2 モデルが新しいトピックについて話す可能性を高める
 seed = 0 ## 乱数の初期値 出力結果を一定にする
