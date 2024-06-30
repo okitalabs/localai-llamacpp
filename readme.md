@@ -1,6 +1,7 @@
 # localai-llamacpp
 gpt-3.5-turbo、text-embedding-ada-002が使用可能なOpenAI API互換サーバを立てる。  
-[LocalAI](https://www.bing.com/search?q=localai+github&qs=n&form=QBRE&sp=-1&lq=0&pq=&sc=0-0&sk=&cvid=406D55AEDDED4776B399B8EF9821A6DC&ghsh=0&ghacc=0&ghpl=)のDockerイメージに[LLaMA.cpp HTTP Server](https://github.com/ggerganov/llama.cpp/blob/master/examples/server/README.md)と[LiteLLM](https://github.com/BerriAI/litellm)も同居した実行環境を構築する。
+[LocalAI](https://www.bing.com/search?q=localai+github&qs=n&form=QBRE&sp=-1&lq=0&pq=&sc=0-0&sk=&cvid=406D55AEDDED4776B399B8EF9821A6DC&ghsh=0&ghacc=0&ghpl=)のDockerイメージに[LLaMA.cpp HTTP Server](https://github.com/ggerganov/llama.cpp/blob/master/examples/server/README.md)と[LiteLLM](https://github.com/BerriAI/litellm)も同居した実行環境を構築する。  
+また、Streamlitによる簡易なチャットを実行する。
 
 ### 実行方針	
 - LocalAIのllamacppは使わない（レスポンスがちょっとおかしくなる事象があるため）
@@ -24,6 +25,7 @@ gpt-3.5-turbo、text-embedding-ada-002が使用可能なOpenAI API互換サー�
 |HostOS|Docker|Comment|
 |:----|:----|:----|
 |28000|8000|LiteLLM Proxy Port|
+|28010|8010|Streamlit Chat app|
 | |8080|LocalAI Port|
 | |8090|lllama-server Port|
 
@@ -119,7 +121,12 @@ curl http://localhost:28000/v1/embeddings \
 > - ダウンロード後、モデルは`models/models--intfloat--multilingual-e5-small/`にダウロードされている。
 > - モデルの指定は、`models/multilingual-e5-small.yaml`を作成して定義する事で、自動的にlocalaiがファイル名をモデル名として認識し、アクセスがあるとモデルをダウンロードして実行する。
 
-### 6. 停止
+
+### 6. チャットを使ってみる
+HostOSのブラウザで、 `http://localhost:28010/にアクセスすると、簡易チャット画面が表示される。
+
+
+### 7. 停止
 ```
 ./stop.sh
 ```

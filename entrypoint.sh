@@ -91,4 +91,8 @@ exec llama-server \
 ## litellm proxy
 exec litellm --config $HOME_DIR/litellm.yaml --detailed_debug --port 8000 -- > $HOME_DIR/logs/litellm.log 2>&1 &
 
+
+## chat
+exec streamlit run $HOME_DIR/chat.py --server.port 8010 > $HOME_DIR/logs/chat.log 2>&1 &
+
 /bin/bash
