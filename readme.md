@@ -85,8 +85,8 @@ localai/localai    latest-gpu-nvidia-cuda-12   be2071271e0d   8 days ago   44.2G
 ./run.sh
 ```
 
-> - 初回起動時はllama.cppをcloneしてコンパイルが始まる。
-> - 2回目以降は`localai-llamacpp/llama.cpp/`に保存されているため、コンパイルしないで起動する。
+> - 初回起動時はllama.cppをgit cloneしてコンパイルが始まる。コンパイルには時間がかかるためすぐには起動しない。コンパイルの終了は、`top`でコンパイラが走らなくたったか、`logs/`に`chat.log  litellm.log  llamacpp.log  localai.log`の4ファイルが作成されたかで確認する。または、dockerの起動オプションを`-itd`から`-it`にすることでフォアグラウンドで実行するとコンパイル状況を確認できる。
+> - 2回目以降は`localai-llamacpp/llama.cpp/`に保存されているため、コンパイルしないで起動する。ただし、モデルのローディングに多少時間がかかる。
 
 
 ### 5. 動作確認

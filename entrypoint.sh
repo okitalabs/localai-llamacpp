@@ -74,7 +74,7 @@ cp $LLAMACPP_DIR/llama-server /usr/local/bin
 ## llama-serverの実行
 ## モデルに応じて --model, --chat-template, --ctx-size, --n-gpu-layersを調整
 exec llama-server \
---model /build/models/Llama-3-ELYZA-JP-8B.Q8_0.gguf \
+--model /build/models/Llama-3-ELYZA-JP-8B-Q8_0.gguf \
 --chat-template llama3 \
 --ctx-size 8192 \
 --n-gpu-layers 33 \
