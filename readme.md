@@ -25,7 +25,7 @@ gpt-3.5-turbo、text-embedding-ada-002が使用可能なOpenAI API互換サー�
 |HostOS|Docker|Comment|
 |:----|:----|:----|
 |28000|8000|LiteLLM Proxy Port|
-|28010|8010|Streamlit Chat app|
+|28010|8010|Streamlit Chat WebApp|
 | |8080|LocalAI Port|
 | |8090|lllama-server Port|
 
