@@ -1,7 +1,8 @@
 # localai-llamacpp
 gpt-3.5-turbo、text-embedding-ada-002が使用可能なOpenAI API互換サーバを立てる。  
 [LocalAI](https://www.bing.com/search?q=localai+github&qs=n&form=QBRE&sp=-1&lq=0&pq=&sc=0-0&sk=&cvid=406D55AEDDED4776B399B8EF9821A6DC&ghsh=0&ghacc=0&ghpl=)のDockerイメージに[LLaMA.cpp HTTP Server](https://github.com/ggerganov/llama.cpp/blob/master/examples/server/README.md)と[LiteLLM](https://github.com/BerriAI/litellm)も同居した実行環境を構築する。  
-また、Streamlitによる簡易なチャットを実行する。
+また、Streamlitによる簡易なチャットを実行する。  
+gpt-3.5-turbo(llama-server)はContinuous Batching対応。text-embedding-ada-002(SentenceBERT)はEmbeddingsのベクトル長が384と最軽量な点が特徴。
 
 ### 実行方針	
 - LocalAIのllamacppは使わない（レスポンスがちょっとおかしくなる事象があるため）
@@ -29,15 +30,15 @@ gpt-3.5-turbo、text-embedding-ada-002が使用可能なOpenAI API互換サー�
 | |8080|LocalAI Port|
 | |8090|lllama-server Port|
 
-#### エントリポイント  
+#### エンドポイント  
 HostOSからアクセスする場合
-|Function|model|Entrypoint|
+|Function|model|Entpoint|
 |:----|:----|:----|
 |Text/Chat Completion|gpt-3.5-turbo|http://localhost:28000/v1/chat/completions|
 |Embeddings|text-embedding-ada-002|http://localhost:28000/v1/embeddings|
 
 Docker内実行エンジン
-|Function|model|Entrypoint|Engine|
+|Function|model|Endpoint|Engine|
 |:----|:----|:----|:----|
 |Text/Chat Completion|Llama-3-ELYZA-JP-8B|http://localhost:8090/v1|llama-server|
 |Embeddings|multilingual-e5-small|http://localhost:8080/v1|localai|
@@ -123,7 +124,7 @@ curl http://localhost:28000/v1/embeddings \
 
 
 ### 6. チャットを使ってみる
-HostOSのブラウザで、 `http://localhost:28010/にアクセスすると、簡易チャット画面が表示される。
+HostOSのブラウザで、 `http://localhost:28010/`にアクセスすると、簡易チャット画面が表示される。
 
 
 ### 7. 停止
@@ -184,6 +185,7 @@ llama-serverのオプション指標。
 > - GPUメモリは起動時の最低消費量。コンテキスト長により増加する。
 
 ### Embeddingsの変更
+Embeddingsのベクトル長が384と最軽量な`multilingual-e5-small`を使用しているが、実践ではよりモデルのおおきな、baseやlargeの方が精度が高い可能性もあるため、変更して検証してみる。
 - `models/`にモデル実行を定義したyamlファイルを配置する。
 - ファイル名はアクセスする時のモデル名 + .yaml
 - モデルファイルはアクセス時にダウンロードされる
@@ -204,12 +206,13 @@ parameters:
 |intfloat/multilingual-e5-small|0.5B|0.766|384|0.7GB|24|
 |intfloat/multilingual-e5-base|1.1B|0.754|768|1.4GB|48|
 |intfloat/multilingual-e5-large|2.3B|0.757|1024|2.4GB|139|
-> - Scoreは[客観的Embeddings評価](https://github.com/okitalabs/Embeddings)による計測。
+> - Scoreは[客観的Embeddings評価](https://github.com/okitalabs/Embeddings)による計測
 > - Embed長はEmbeddingsのベクトル長
 > - 処理速度は512文字、2700件をHuggingFaceEmbeddingsで1件ずつ処理した時の秒数
+> - 実践ではよりモデルの大きい、baseやlargeの方が精度が高い可能性もあるため変更して検証してみる
 
-### Entrypointの変更
-- エントリポイントはLiteLLM Proxyで一元化している。
+### エンドポイントの変更
+- エンドポイントはLiteLLM Proxyで一元化している。
 - `litellm.yaml`で定義している。
 - yamlのmodelの`openai/`はOpenAI APIでアクセスするという設定。その後にのアクセス先のモデル名となる。
 ```
