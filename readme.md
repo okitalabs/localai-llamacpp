@@ -5,13 +5,13 @@ gpt-3.5-turbo、text-embedding-ada-002が使用可能なOpenAI API互換サー�
 gpt-3.5-turbo(llama-server)はContinuous Batching対応。text-embedding-ada-002(SentenceBERT)はEmbeddingsのベクトル長が384と最軽量な点が特徴。
 
 ### 実行方針	
-- LocalAIのllamacppは使わない（レスポンスがちょっとおかしくなる事象があるため）
-- LLMの実行はllama-server(LLaMA.cpp HTTP Server)を使用する
-- LLMのモデルは、Llama-3-ELYZA-JP-8B-Q8_0.ggufを使用する（精度が高くモデルサイズが小さいため）
-- EmbeddingsはSentenceBERT(multilingual-e5-small)をLocalAIのSentenceTransformerで実行する（精度がそこそこ高く、モデルサイズが小さく高速で、Embedサイズが小さいため、ただし最大コンテキスト長は512tokenの制限がある。ちなみに、日本語512文字で400token前後）
-- llama-serverのコンパイルはentrypoint.shで行う（docker buildでコンパイルすると実行時に ggml-cuda.cu was compiled for: 520 エラーになるため）
-- endpointの一元化にLiteLLM Proxyを使用する
-- GPUを使用する（例ではP40/24GB x3台）
+- LocalAIのllamacppは使わない（レスポンスがちょっとおかしくなる事象があるため）。
+- LLMの実行はllama-server(LLaMA.cpp HTTP Server)を使用する。
+- LLMのモデルは、Llama-3-ELYZA-JP-8B-Q8_0.ggufを使用する（精度が高くモデルサイズが小さいため）。
+- EmbeddingsはSentenceBERT(multilingual-e5-small)をLocalAIのSentenceTransformerで実行する（精度がそこそこ高く、モデルサイズが小さく高速で、Embedサイズが小さいため、ただし最大コンテキスト長は512tokenの制限がある。ちなみに、日本語512文字で400token前後）。
+- llama-serverのコンパイルはentrypoint.shで行う（docker buildでコンパイルすると実行時に ggml-cuda.cu was compiled for: 520 エラーになるため）。
+- endpointの一元化にLiteLLM Proxyを使用する。
+- GPUを使用する（例ではP40/24GB x3台）。
 
 
 ### 環境
@@ -180,16 +180,15 @@ llama-serverのオプション指標。
 |karakuri-lm-8x7b-instruct-v0.1-Q6_K.gguf|47B|6bit|37GB|mistral|32768|33|[ReadyON/karakuri-lm-8x7b-instruct-v0.1-gguf](https://huggingface.co/ReadyON/karakuri-lm-8x7b-instruct-v0.1-gguf)|
 |karakuri-lm-70b-chat-v0.1-q4_K_M.gguf|70B|4bit|40GB|llama2|4096|81|[mmnga/karakuri-lm-70b-chat-v0.1-gguf](https://huggingface.co/mmnga/karakuri-lm-70b-chat-v0.1-gguf)|
 
-
-
 > - GPUメモリは起動時の最低消費量。コンテキスト長により増加する。
+
 
 ### Embeddingsの変更
 Embeddingsのベクトル長が384と最軽量な`multilingual-e5-small`を使用しているが、実践ではよりモデルのおおきな、baseやlargeの方が精度が高い可能性もあるため、変更して検証してみる。
 - `models/`にモデル実行を定義したyamlファイルを配置する。
-- ファイル名はアクセスする時のモデル名 + .yaml
-- モデルファイルはアクセス時にダウンロードされる
--  intfloat/multilingual-e5-largeをmultilingual-e5-largeとして定義する場合の設定は以下
+- ファイル名はアクセスする時のモデル名 + .yaml。
+- モデルファイルはアクセス時にダウンロードされる。
+-  intfloat/multilingual-e5-largeをmultilingual-e5-largeとして定義する場合の設定は以下。
 ```
 $ cd /home/users/localai-llamacpp/models
 $ cat multilingual-e5-large.yaml
@@ -206,10 +205,10 @@ parameters:
 |intfloat/multilingual-e5-small|0.5B|0.766|384|0.7GB|24|
 |intfloat/multilingual-e5-base|1.1B|0.754|768|1.4GB|48|
 |intfloat/multilingual-e5-large|2.3B|0.757|1024|2.4GB|139|
-> - Scoreは[客観的Embeddings評価](https://github.com/okitalabs/Embeddings)による計測
-> - Embed長はEmbeddingsのベクトル長
-> - 処理速度は512文字、2700件をHuggingFaceEmbeddingsで1件ずつ処理した時の秒数
-> - 実践ではよりモデルの大きい、baseやlargeの方が精度が高い可能性もあるため変更して検証してみる
+> - Scoreは[客観的Embeddings評価](https://github.com/okitalabs/Embeddings)による計測。
+> - Embed長はEmbeddingsのベクトル長。
+> - 処理速度は512文字、2700件をHuggingFaceEmbeddingsで1件ずつ処理した時の秒数。
+> - 実践ではよりモデルの大きい、baseやlargeの方が精度が高い可能性もあるため変更して検証してみる。
 
 ### エンドポイントの変更
 - エンドポイントはLiteLLM Proxyで一元化している。
