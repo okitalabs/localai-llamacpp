@@ -3,7 +3,7 @@
 
 [参考](https://secon.dev/entry/2024/04/02/070000-japanese-reranker-release/)
 
-RerankerはRAGのの精度向上で使用する。質問文と文章を同じコンテキストで評価するため、ベクトルの類似度よりも、質問と文章の関連性を理解したより高い評価が可能。ただし、ベクトルの類似度のように事前に計算しておくことが出来ないため計算コストが高いため、ベクトル類似度や全文検索で多めの候補を抽出し、その候補のみを再ランクすることにより、最終的な候補を絞り込むのに使用される。
+RerankerはRAGの精度向上で使用する。質問文と文章を同じコンテキストで評価するため、ベクトルの類似度よりも質問と文章の関連性を理解したより高い評価が可能。ただし、ベクトルの類似度のように事前に計算しておくことが出来ないため計算コストが高いため、ベクトル類似度や全文検索で多めの候補を抽出し、その候補のみを再ランクすることにより最終的な候補を絞り込むのに使用される。
 
 LocalAIでは[Reranker](https://localai.io/features/reranker/)の機能がサポートされている。実装は[AnswerDotAI/rerankers](https://github.com/AnswerDotAI/rerankers)、APIはOpenAIでは定義されていないため [Cohere](https://litellm.vercel.app/docs/proxy/pass_through)のAPI（たぶん）。  モデルはRerank用にファインチューニングされたものが必要、デフォルトでは[mixedbread-ai/mxbai-rerank-base-v1](https://huggingface.co/mixedbread-ai/mxbai-rerank-base-v1)が使用される。
 
@@ -56,13 +56,13 @@ Dockerを再起動し、HostOSからアクセスする。
 
 
 ### Rerankにアクセス
-「仕事に関する話」に近い文書をランキングしてみる。
+「食べ物に関する話」に近い文書をランキングしてみる。
 ```
 curl http://localhost:28000/v1/rerank \
   -H "Content-Type: application/json" \
   -d '{
   "model": "jina-reranker-v1-base-en",
-  "query": "仕事に関する話",
+  "query": "食べ物に関する話",
   "documents": [
     "昨日は友達と公園でピクニックをしました。",
     "新しいレストランで食事をして、美味しいパスタを食べました。",
