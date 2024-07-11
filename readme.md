@@ -248,5 +248,33 @@ litellm.log  llamacpp.log  localai.log
 ```
 
 
+## Reranker
+LocalAIでRerankingのAPIを使いたい場合。  
+[Reranker](readme_reranker.md)参照。  
+
+設定はGitHubに反映済み。  
+以下のコマンドで動作するか確認。
+```
+curl http://localhost:28000/v1/rerank \
+  -H "Content-Type: application/json" \
+  -d '{
+  "model": "jina-reranker-v1-base-en",
+  "query": "食べ物に関する話",
+  "documents": [
+    "昨日は友達と公園でピクニックをしました。",
+    "新しいレストランで食事をして、美味しいパスタを食べました。",
+    "次の週末には山登りに行く予定です。",
+    "昨晩、面白い映画を見ました。",
+    "明日は大事な会議があるので、早く寝るつもりです。",
+    "最近、読書に夢中になっています。",
+    "彼はスポーツが得意で、特にサッカーが好きです。",
+    "夏休みには家族と一緒に旅行に行きます。",
+    "昨日の夕食は、自分で作ったカレーライスでした。",
+    "今日は新しいプロジェクトの打ち合わせがあります。"
+  ],
+  "top_n": 3
+}'
+```
+
 <hr>
 LLM実行委員会

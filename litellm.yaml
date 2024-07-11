@@ -9,3 +9,11 @@ model_list:
       model: openai/multilingual-e5-small
       api_base: http://localhost:8080/v1
       api_key: None
+general_settings:
+  master_key: sk-1234
+  pass_through_endpoints:
+    - path: "/v1/rerank"
+      target: "http://localhost:8080/v1/rerank"
+      headers:
+        content-type: application/json
+        accept: application/json

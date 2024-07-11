@@ -1,0 +1,4 @@
+name: jina-reranker-v1-base-en
+backend: rerankers
+parameters:
+  model: cross-encoder
