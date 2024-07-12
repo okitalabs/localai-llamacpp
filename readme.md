@@ -175,8 +175,10 @@ llama-serverのオプション指標。
 |Model File|Param|Quant|GPU Mem|chat-template|ctx-size|n-gpu-layers|URL|
 |:----|:----|:----|:----|:----|:----|:----|:----|
 |DataPilot-ArrowPro-7B-KUJIRA-Q8_0.gguf|7B|8bit|8GB|mistral|4096|33|[mmnga/DataPilot-ArrowPro-7B-KUJIRA-gguf](https://huggingface.co/mmnga/DataPilot-ArrowPro-7B-KUJIRA-gguf)|
+|Llama3-ArrowSE-8B-v0.3-Q8_0.gguf|8B|8bit|8GB|llama3|8192|33|[mmnga/Llama3-ArrowSE-8B-v0.3-gguf](https://huggingface.co/mmnga/Llama3-ArrowSE-8B-v0.3-gguf)|
 |Llama-3-ELYZA-JP-8B.Q8_0.gguf|8B|8bit|8GB|llama3|8192|33|[mmnga/Llama-3-ELYZA-JP-8B-gguf](https://huggingface.co/mmnga/Llama-3-ELYZA-JP-8B-gguf)|
 |vicuna-13b-v1.5.Q8_0.gguf|13B|8bit|14GB|vicuna|4096|41|[TheBloke/vicuna-13B-v1.5-GGUF](https://huggingface.co/TheBloke/vicuna-13B-v1.5-GGUF)|
+|calm3-22b-chat-Q6_K.gguf|22B|6bit|18GB|chatml|16384|49|[grapevine-AI/CALM3-22B-Chat-GGUF](https://huggingface.co/grapevine-AI/CALM3-22B-Chat-GGUF)|
 |karakuri-lm-8x7b-instruct-v0.1-Q6_K.gguf|47B|6bit|37GB|mistral|32768|33|[ReadyON/karakuri-lm-8x7b-instruct-v0.1-gguf](https://huggingface.co/ReadyON/karakuri-lm-8x7b-instruct-v0.1-gguf)|
 |karakuri-lm-70b-chat-v0.1-q4_K_M.gguf|70B|4bit|40GB|llama2|4096|81|[mmnga/karakuri-lm-70b-chat-v0.1-gguf](https://huggingface.co/mmnga/karakuri-lm-70b-chat-v0.1-gguf)|
 
