@@ -37,7 +37,6 @@ Re-Rank Endpointをパススルーで追加する。
 `litellm.yaml`
 ```
 general_settings:
-  master_key: sk-1234
   pass_through_endpoints:
     - path: "/v1/rerank"
       target: "http://localhost:8080/v1/rerank"
