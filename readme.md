@@ -27,8 +27,8 @@ gpt-3.5-turbo(llama-server)はContinuous Batching対応。text-embedding-ada-002
 |:----|:----|:----|
 |28000|8000|LiteLLM Proxy Port|
 |28010|8010|Streamlit Chat WebApp|
-| |8080|LocalAI Port|
-| |8090|lllama-server Port|
+|28080 |8080|LocalAI Port|
+|28090 |8090|lllama-server Port|
 
 #### エンドポイント  
 HostOSからアクセスする場合
@@ -36,6 +36,7 @@ HostOSからアクセスする場合
 |:----|:----|:----|
 |Text/Chat Completion|gpt-3.5-turbo|http://localhost:28000/v1/chat/completions|
 |Embeddings|text-embedding-ada-002|http://localhost:28000/v1/embeddings|
+|Rerank|jina-reranker-v1-base-en|http://localhost:28000/v1/embeddings|
 
 Docker内実行エンジン
 |Function|model|Endpoint|Engine|
@@ -278,5 +279,14 @@ curl http://localhost:28000/v1/rerank \
 }'
 ```
 
+> ### DifyのRerankerの利用時の注意  
+> [DiFy](https://github.com/langgenius/dify)の[Rerankモデルの設定](https://docs.dify.ai/v/japanese/guides/knowledge-base/integrate_knowledge_within_application#id-3-zhong-pai-xu-rerank)で、LiteLLMのエンドポイントに接続するとエラーになる。  これは、DiFyの登録確認用のリクエストで`top_n=null`になっているため、LiteLLMのJSonパーサーでエラーになってしまうもよう。  
+> Rerankは、直接LocalAIのエントリポイントに接続する。
+> 
+> |Function|model|Entpoint|
+> |:----|:----|:----|
+> |Rerank|jina-reranker-v1-base-en|http://> localhost:28080/v1/embeddings|
+
 <hr>
+
 LLM実行委員会
