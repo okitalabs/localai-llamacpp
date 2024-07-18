@@ -143,7 +143,7 @@ HostOSのブラウザで、 `http://localhost:28010/`にアクセスすると、
 ## モデルの変更
 実行するモデルを変更したい場合。
 
-### Text/Chat Completionの変更
+### Text/Chat Completionモデルの変更
 - GGUF形式のモデルファイルを`models/`以下にダウンロード。
 - `entrypoint.sh`で起動しているllama-serverの設定を変更する。
 - Dockerコンテナ内のモデルファイルは`/build/models`に配置される。
@@ -188,7 +188,7 @@ llama-serverのオプション指標。
 
 
 ### Embeddingsの変更
-Embeddingsのベクトル長が384と最軽量な`multilingual-e5-small`を使用しているが、実践ではよりモデルのおおきな、baseやlargeの方が精度が高い可能性もあるため、変更して検証してみる。
+Embeddingsのベクトル長が384と最軽量な`multilingual-e5-small`を使用しているが、実践ではより大きいbaseやlargeの方が精度が高い可能性もあるため、変更して検証してみる。
 - `models/`にモデル実行を定義したyamlファイルを配置する。
 - ファイル名はアクセスする時のモデル名 + .yaml。
 - モデルファイルはアクセス時にダウンロードされる。
