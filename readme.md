@@ -36,13 +36,14 @@ HostOSからアクセスする場合
 |:----|:----|:----|
 |Text/Chat Completion|gpt-3.5-turbo|http://localhost:28000/v1/chat/completions|
 |Embeddings|text-embedding-ada-002|http://localhost:28000/v1/embeddings|
-|Rerank|jina-reranker-v1-base-en|http://localhost:28000/v1/embeddings|
+|Rerank|jina-reranker-v1-base-en|http://localhost:28000/v1/rerank|
 
 Docker内実行エンジン
 |Function|model|Endpoint|Engine|
 |:----|:----|:----|:----|
-|Text/Chat Completion|Llama-3-ELYZA-JP-8B|http://localhost:8090/v1|llama-server|
-|Embeddings|multilingual-e5-small|http://localhost:8080/v1|localai|
+|Text/Chat Completion|Llama-3-ELYZA-JP-8B|http://localhost:8090/v1/chat/completions|llama-server|
+|Embeddings|multilingual-e5-small|http://localhost:8080/v1/embeddings|localai|
+|Rerank|jina-reranker-v1-base-en|http://localhost:8080/v1/rerank|localai|
 
 
 <br>
