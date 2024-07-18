@@ -285,7 +285,7 @@ curl http://localhost:28000/v1/rerank \
 > 
 > |Function|model|Entpoint|
 > |:----|:----|:----|
-> |Rerank|jina-reranker-v1-base-en|http://> localhost:28080/v1/embeddings|
+> |Rerank|jina-reranker-v1-base-en|http://localhost:28080/v1/embeddings|
 
 <hr>
 
