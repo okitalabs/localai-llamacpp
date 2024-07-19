@@ -234,8 +234,6 @@ model_list:
       api_key: None
 ```
 
-
-
 <br>
 <hr>
 <br>
@@ -251,6 +249,9 @@ $ ls logs
 litellm.log  llamacpp.log  localai.log
 ```
 
+<br>
+<hr>
+<br>
 
 ## Reranker
 LocalAIでRerankingのAPIを使いたい場合。  
@@ -288,6 +289,9 @@ curl http://localhost:28000/v1/rerank \
 > |:----|:----|:----|
 > |Rerank|jina-reranker-v1-base-en|http://localhost:28080/v1/embeddings|
 
+<br>
+<hr>
+<br>
 
 ## GPT Vision
 [GPT Vision](https://localai.io/features/gpt-vision/)は、GPT-4oで使用可能な画像からテキストを生成する[OpenAI Vision API](https://platform.openai.com/docs/guides/vision)の互換機能。  
