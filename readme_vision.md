@@ -1,16 +1,16 @@
 # GPT Vision
 
-[GPT Vision](https://localai.io/features/gpt-vision/)は、GPT-4oで使用可能な画像からテキストを生成する[OpenAI Vision API](https://platform.openai.com/docs/guides/vision)の互換機能。LocalAIからllama-cppを起動し、LLaVAモデルを実行する。実行には、画像を認識するモデルと、言語を生成する2つのモデルを使用する。  
+[GPT Vision](https://localai.io/features/gpt-vision/)は、GPT-4oの機能である、画像からテキストを生成する[OpenAI Vision API](https://platform.openai.com/docs/guides/vision)の互換機能。LocalAIからllama-cppを起動し、LLaVAモデルを実行する。実行には、画像を認識するモデルと、言語を生成する2つのモデルを使用する。
 
 
-text/chat completionとは別に実行するため、メモリの十分な空き容量があること。  
+text/chat completionとは別に実行するため、メモリの十分な空き容量があること。
 
 <br>
 <hr>
 <br>
 
 ## 環境
-### エンドポイント  
+### エンドポイント
 HostOSからアクセスする場合
 |Function|model|Entpoint|
 |:----|:----|:----|
@@ -243,9 +243,9 @@ print(response.json())
 
 
 ## 参考
-- [LocalAI GPT Vision](https://localai.io/features/gpt-vision/)  
-- [OpenAI Vision API](https://platform.openai.com/docs/guides/vision)  
-- [LocalAI/examples/configurations/llava/](https://github.com/mudler/LocalAI/blob/master/examples/configurations/llava/llava.yaml)  
+- [LocalAI GPT Vision](https://localai.io/features/gpt-vision/)
+- [OpenAI Vision API](https://platform.openai.com/docs/guides/vision)
+- [LocalAI/examples/configurations/llava/](https://github.com/mudler/LocalAI/blob/master/examples/configurations/llava/llava.yaml)
 - [mys/ggml_llava-v1.5-7b](https://huggingface.co/mys/ggml_llava-v1.5-7b
 )
 <hr>
