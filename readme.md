@@ -294,7 +294,7 @@ curl http://localhost:28000/v1/rerank \
 <br>
 
 ## GPT Vision
-[GPT Vision](https://localai.io/features/gpt-vision/)は、GPT-4oで使用可能な画像からテキストを生成する[OpenAI Vision API](https://platform.openai.com/docs/guides/vision)の互換機能。  
+GPT-4oで使用可能な画像からテキストを生成する[OpenAI Vision API](https://platform.openai.com/docs/guides/vision)の互換機能。  
 [GPT Vision](readme_vision)参照。
 
 text/chat completionとは別に実行するため、メモリの十分な空き容量があること。  
