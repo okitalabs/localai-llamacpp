@@ -31,7 +31,7 @@ HostOSからアクセスする場合
 
 
 ## 導入手順
-LocalAIの[llava examples](https://github.com/mudler/LocalAI/blob/master/examples/configurations/llava/llava.yaml)を参考に、そのまま適用している。ベースのモデルは [mys/ggml_llava-v1.5-7b](https://huggingface.co/mys/ggml_llava-v1.5-7b)、日本語で質問すると日本語で回答する。
+LocalAIの[llava examples](https://github.com/mudler/LocalAI/blob/master/examples/configurations/llava/)を参考に、そのまま適用している。ベースのモデルは [mys/ggml_llava-v1.5-7b](https://huggingface.co/mys/ggml_llava-v1.5-7b)、日本語で質問すると日本語で回答する。
 
 ### モデルのダウンロード
 `ggml-model-q4_k.gguf`と`mmproj-model-f16.gguf`を`models/`にダウンロードする。
