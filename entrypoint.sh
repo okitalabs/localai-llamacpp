@@ -54,7 +54,8 @@ fi
 HOME_DIR=/localai ## llama.cppをダウンロードするディレクトリ
 
 ## localaiの起動
-exec ./local-ai > $HOME_DIR/logs/localai.log 2>&1 & 
+## デバッグする場合 --log-level [error,warn,info,debug,trace]
+exec ./local-ai --log-level info > $HOME_DIR/logs/localai.log 2>&1 & 
 
 ## llama-serverのコンパイル
 ## $LLAMACPP_DIRが無ければllama.cppをgit clone
