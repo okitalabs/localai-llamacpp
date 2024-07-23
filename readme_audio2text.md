@@ -1,8 +1,8 @@
 # Audio to Text
 
-[Audio to Text](https://localai.io/features/audio-to-text/)は、オーディオファイルからテキストを生成する[OpenAI Speech to text API](https://platform.openai.com/docs/guides/speech-to-text)の互換機能。LocalAIから[whisper.cpp](https://github.com/ggerganov/whisper.cpp)を起動し、Whisperのモデルを実行する。実行にはのWhisperの[GGUFモデル](https://huggingface.co/rahalmichel/whisper-ggml/tree/main)を使用する。  
+[Audio to Text](https://localai.io/features/audio-to-text/)は、オーディオファイルからテキストを生成する[OpenAI Speech to text API](https://platform.openai.com/docs/guides/speech-to-text)の互換機能。LocalAIから[whisper.cpp](https://github.com/ggerganov/whisper.cpp)を起動しWhisperを実行する。モデルファイルはWhisperの[GGUFモデル](https://huggingface.co/rahalmichel/whisper-ggml/tree/main)を使用する。  
 
-text/chat completionとは別に実行するため、メモリの十分な空き容量があること。  
+独立したモデルとして実行するため、GPUメモリの十分な空き容量があること。  
 
 
 <br>
@@ -16,13 +16,12 @@ HostOSからアクセスする場合
 |Function|model|Entpoint|
 |:----|:----|:----|
 |audio to text|whisper|http://localhost:28000/v1/audio/transcriptions|
-> localai直接接続
 
 
 ### モデル
-モデルはGGMLに変換されたものを使用する。[ggerganov/whisper.cpp](https://huggingface.co/ggerganov/whisper.cpp/tree/main)に大小複数あるので、最適なモデルを選択する。  
-
-Secは、[CM原稿（せっけん）](https://pro-video.jp/voice/announce/)の[001-sibutomo.mp3](https://pro-video.jp/voice/announ、ce/mp3/001-sibutomo.mp3)、23秒のファイルの処理時間。
+GGMLに変換されたモデルはファイルを使用する。  
+[ggerganov/whisper.cpp](https://huggingface.co/ggerganov/whisper.cpp/tree/main)に大小複数のモデルファイルがあるので、最適なモデルを選択する。  
+Secは、[CM原稿（せっけん）](https://pro-video.jp/voice/announce/)の[001-sibutomo.mp3](https://pro-video.jp/voice/announ、ce/mp3/001-sibutomo.mp3)、23秒のファイルの処理時間。  
 
 |Model|GPU Mem|Sec|GGML|
 |:----|:----|:----|:----|
@@ -52,11 +51,13 @@ Secは、[CM原稿（せっけん）](https://pro-video.jp/voice/announce/)の[0
 ## 導入手順
 
 ### Dockerイメージ
-ffmpeg版のDockerイメージを作成する必要がある。未対応の場合、Dockerイメージをリビルドし、` localai-llamacpp`イメージを作成し直すこと。
+localaiのffmpeg版のDockerイメージを作成する必要がある。未対応の場合Dockerイメージをリビルドし、` localai-llamacpp`イメージを作成し直すこと。
 
 `Dockerfile`のベースイメージの変更
 - Audio to Text(Whisper)を使用する場合はffmpeg版を使う   
 - NVIDIA Driverが535以下はcuda-11版を使う 
+
+`Dockerfile`
 ```
 # FROM localai/localai:v2.19.1-cublas-cuda11-ffmpeg
 FROM localai/localai:v2.19.1-cublas-cuda12-ffmpeg
@@ -66,7 +67,7 @@ FROM localai/localai:v2.19.1-cublas-cuda12-ffmpeg
 > ffmpeg版はlatest指定が無いため、最新版のバージョンはdockerhubの[localai/localai](https://hub.docker.com/r/localai/localai/tags)で確認する。
 
 #### Dockerのrebuild  
-llama.cppディレクトリを削除し再コンパイルし直す
+llamacpp.serverをコンパイルし直すため、llama.cppディレクトリを削除する。
 ```
 cd llamacpp-localai
 ./stop.sh ## Docker停止
@@ -81,7 +82,6 @@ rm -fr llama.cpp ## llama.serverの削除（再構築）
 
 ```
 cd models/
-
 wget https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3.bin
 ```
 
@@ -122,9 +122,8 @@ run.sh
 
 
 ## 動作確認
-Dockerを再起動し、HostOSからアクセスする。
-初回アクセス時は、モデルをダウンロード、起動するため少し時間が
-かかる。
+Dockerを再起動しHostOSからアクセスする。
+初回アクセス時はモデルを起動するため少し時間がかかる。
 
 ### コマンドで確認
 
@@ -146,7 +145,164 @@ curl http://localhost:28080/v1/audio/transcriptions -H "Content-Type: multipart/
 
 レスポンス
 ```
-{"segments":[{"id":0,"start":880000000,"end":3820000000,"text":"無添加のシャボン玉石鹸ならもう安心!","tokens":[16976,14176,119,9990,2972,11054,17233,37626,4824,8051,231,36783,47219,116,42540,16324,16206,7945,0,50556]},{"id":1,"start":3820000000,"end":10260000000,"text":"天然の保湿成分が含まれるため、肌にうるおいを与え、健やかに保ちます。","tokens":[6135,5823,2972,24302,33744,123,11336,6627,5142,2392,104,2889,35367,49983,1231,14356,234,4108,2646,4895,33261,5998,940,236,6474,1231,44201,7355,3703,4108,24302,6574,5368,1543,50878]},{"id":2,"start":10260000000,"end":16680000000,"text":"お肌のことでお悩みの方は、ぜひ一度、無添加シャボン玉石鹸をお試しください。","tokens":[6117,14356,234,2972,13235,2474,6117,14696,102,11362,2972,9249,3065,1231,20258,26950,2257,13127,1231,16976,14176,119,9990,11054,17233,37626,4824,8051,231,36783,47219,116,5998,6117,22099,2849,25079,1543,51199]},{"id":3,"start":16680000000,"end":22400000000,"text":"お求めは、0120-0055-95まで。","tokens":[6117,32718,11429,3065,1231,10607,2009,12,628,13622,12,15718,28176,1543,51485]},{"id":4,"start":22400000000,"end":24400000000,"text":"ありがとうございました。","tokens":[50365,38538,1543,50465]}],"text":"無添加のシャボン玉石鹸ならもう安心!天然の保湿成分が含まれるため、肌にうるおいを与え、健やかに保ちます。お肌のことでお悩みの方は、ぜひ一度、無添加シャボン玉石鹸をお試しください。お求めは、0120-0055-95まで。ありがとうございました。"}
+{
+	"segments": [
+		{
+			"id": 0,
+			"start": 880000000,
+			"end": 3820000000,
+			"text": "無添加のシャボン玉石鹸ならもう安心!",
+			"tokens": [
+				16976,
+				14176,
+				119,
+				9990,
+				2972,
+				11054,
+				17233,
+				37626,
+				4824,
+				8051,
+				231,
+				36783,
+				47219,
+				116,
+				42540,
+				16324,
+				16206,
+				7945,
+				0,
+				50556
+			]
+		},
+		{
+			"id": 1,
+			"start": 3820000000,
+			"end": 10260000000,
+			"text": "天然の保湿成分が含まれるため、肌にうるおいを与え、健やかに保ちます。",
+			"tokens": [
+				6135,
+				5823,
+				2972,
+				24302,
+				33744,
+				123,
+				11336,
+				6627,
+				5142,
+				2392,
+				104,
+				2889,
+				35367,
+				49983,
+				1231,
+				14356,
+				234,
+				4108,
+				2646,
+				4895,
+				33261,
+				5998,
+				940,
+				236,
+				6474,
+				1231,
+				44201,
+				7355,
+				3703,
+				4108,
+				24302,
+				6574,
+				5368,
+				1543,
+				50878
+			]
+		},
+		{
+			"id": 2,
+			"start": 10260000000,
+			"end": 16680000000,
+			"text": "お肌のことでお悩みの方は、ぜひ一度、無添加シャボン玉石鹸をお試しください。",
+			"tokens": [
+				6117,
+				14356,
+				234,
+				2972,
+				13235,
+				2474,
+				6117,
+				14696,
+				102,
+				11362,
+				2972,
+				9249,
+				3065,
+				1231,
+				20258,
+				26950,
+				2257,
+				13127,
+				1231,
+				16976,
+				14176,
+				119,
+				9990,
+				11054,
+				17233,
+				37626,
+				4824,
+				8051,
+				231,
+				36783,
+				47219,
+				116,
+				5998,
+				6117,
+				22099,
+				2849,
+				25079,
+				1543,
+				51199
+			]
+		},
+		{
+			"id": 3,
+			"start": 16680000000,
+			"end": 22400000000,
+			"text": "お求めは、0120-0055-95まで。",
+			"tokens": [
+				6117,
+				32718,
+				11429,
+				3065,
+				1231,
+				10607,
+				2009,
+				12,
+				628,
+				13622,
+				12,
+				15718,
+				28176,
+				1543,
+				51485
+			]
+		},
+		{
+			"id": 4,
+			"start": 22400000000,
+			"end": 24400000000,
+			"text": "ありがとうございました。",
+			"tokens": [
+				50365,
+				38538,
+				1543,
+				50465
+			]
+		}
+	],
+	"text": "無添加のシャボン玉石鹸ならもう安心!天然の保湿成分が含まれるため、肌にうるおいを与え、健やかに保ちます。お肌のことでお悩みの方は、ぜひ一度、無添加シャボン玉石鹸をお試しください。お求めは、0120-0055-95まで。ありがとうございました。"
+}
 ```
 
 #### ファイル形式に関して
