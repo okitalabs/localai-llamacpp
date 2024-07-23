@@ -343,6 +343,7 @@ print(transcript.text)
 - [OpenAI API Speech to text](https://platform.openai.com/docs/guides/speech-to-text)
 - [HuggingFace ggerganov/whisper.cpp](https://huggingface.co/ggerganov/whisper.cpp/tree/main) - GGMLモデルファイル
 - [サンプル音声/無料ダウンロード](https://pro-video.jp/voice/announce/)
+- [みんなの健康ラジオ](https://www.jorf.co.jp/programs.php)
 <hr>
 
 LLM実行委員会
