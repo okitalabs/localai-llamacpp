@@ -250,4 +250,4 @@ print(response.json())
 )
 <hr>
 
-LLM実行委員回
+LLM実行委員会

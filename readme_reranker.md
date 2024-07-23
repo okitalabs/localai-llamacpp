@@ -79,7 +79,7 @@ curl http://localhost:28000/v1/rerank \
 ```
 
 #### Rerank結果
-relevance_scoreが高いほど関連度が高い。食べ物に関する文章が上位に来る。  
+relevance_scoreが高いほど関連度が高い。食べ物に関する文章が上位に来る。
 
 json整形後
 ```
@@ -171,21 +171,21 @@ json整形後
 ## Rerankモデル
 あまりない💦
 
-- [BAAI/bge-reranker-large](https://huggingface.co/BAAI/bge-reranker-large)  
-- [nreimers/mmarco-mMiniLMv2-L12-H384-v1](https://huggingface.co/nreimers/mmarco-mMiniLMv2-L12-H384-v1/tree/main)  
-- [hotchpotch/japanese-bge-reranker-v2-m3-v1](https://huggingface.co/hotchpotch/japanese-bge-reranker-v2-m3-v1)  
-- [hotchpotch/japanese-reranker-cross-encoder-small-v1](https://huggingface.co/hotchpotch/japanese-reranker-cross-encoder-small-v1)  
+- [BAAI/bge-reranker-large](https://huggingface.co/BAAI/bge-reranker-large)
+- [nreimers/mmarco-mMiniLMv2-L12-H384-v1](https://huggingface.co/nreimers/mmarco-mMiniLMv2-L12-H384-v1/tree/main)
+- [hotchpotch/japanese-bge-reranker-v2-m3-v1](https://huggingface.co/hotchpotch/japanese-bge-reranker-v2-m3-v1)
+- [hotchpotch/japanese-reranker-cross-encoder-small-v1](https://huggingface.co/hotchpotch/japanese-reranker-cross-encoder-small-v1)
     - base/largeモデルは、`You need to install fugashi to use MecabTokenizer`エラーになる。
 
 
 
 
 ## 参考
-- [日本語最高性能のRerankerをリリース / そもそも Reranker とは?](https://secon.dev/entry/2024/04/02/070000-japanese-reranker-release/)  
-- [日本語 Reranker 作成のテクニカルレポート](https://secon.dev/entry/2024/04/02/080000-japanese-reranker-tech-report/)  
-- [文書検索におけるリランキングの効果を検証する](https://hironsan.hatenablog.com/entry/information-retrieval-with-reranker)  
+- [日本語最高性能のRerankerをリリース / そもそも Reranker とは?](https://secon.dev/entry/2024/04/02/070000-japanese-reranker-release/)
+- [日本語 Reranker 作成のテクニカルレポート](https://secon.dev/entry/2024/04/02/080000-japanese-reranker-tech-report/)
+- [文書検索におけるリランキングの効果を検証する](https://hironsan.hatenablog.com/entry/information-retrieval-with-reranker)
 - [Google Colab で japanese-reranker-cross-encoder-large-v1 を試す](https://note.com/npaka/n/n906b23636ac8)
 - [Sentence BERTをFine TuningしてFAQを類似文書検索してみる](https://acro-engineer.hatenablog.com/entry/2023/01/16/120000#:~:text=Sentence%20BERT%E3%81%A8%E3%81%AF%E3%80%81BERT,%E3%81%A8%E3%81%84%E3%81%86%E5%86%85%E5%AE%B9%E3%81%AB%E3%81%AA%E3%82%8A%E3%81%BE%E3%81%99%E3%80%82)
 
 <hr>
-LLM実行委員回
+LLM実行委員会

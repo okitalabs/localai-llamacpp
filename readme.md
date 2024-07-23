@@ -82,6 +82,18 @@ localai-llamacpp   latest                      249482681bbf   2 days ago   44.5G
 localai/localai    latest-gpu-nvidia-cuda-12   be2071271e0d   8 days ago   44.2GB
 ```
 
+> `Dockerfile`のベースイメージの変更
+> - Audio to Text(Whisper)を使用する場合はffmpeg版を使う   
+> - NVIDIA Driverが535以下はcuda-11版を使う 
+> ```
+> # FROM localai/localai:v2.19.1-cublas-cuda11-ffmpeg
+> # FROM localai/localai:v2.19.1-cublas-cuda12-ffmpeg
+> # FROM localai/localai:latest-gpu-nvidia-cuda-11
+> FROM localai/localai:latest-gpu-nvidia-cuda-12
+> ```
+> rebuildする場合、llama.cppディレクトリを削除する（再コンパイルし直す）
+
+
 ### 4. Dockerの起動
 
 ```
@@ -301,6 +313,16 @@ text/chat completionとは別に実行するため、メモリの十分な空き
 
 > デフォルトでは設定されていないため、使用する場合設定を追加すること。
 
+
+## Audio to Text(Whisper)
+オーディオファイルからテキストを生成する[OpenAI Speech to text](https://platform.openai.com/docs/guides/speech-to-text)の互換機能。  
+[Audio to Text](readme_audio2text.md)参照。
+
+
+> デフォルトでは設定されていないため、使用する場合Dockerをmpeg版でリビルドし、設定を追加すること。
+
+<br>
 <hr>
+<br>
 
 LLM実行委員会
