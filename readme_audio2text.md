@@ -29,7 +29,7 @@ Secは、[CM原稿（せっけん）](https://pro-video.jp/voice/announce/)の[0
 |base|690MiB|1.160s|[ggml-base.bin](https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base.bin)|
 |small|1284MiB|1.602s|[ggml-small.bin](https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-small.bin)|
 |medium|2864MiB|2.872s|[ggml-medium.bin](https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-medium.bin)|
-|large|4996MiB|5.232s|[ggml-large.bin](https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3.bin)|
+|large|4996MiB|5.232s|[ggml-large-v3.bin](https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3.bin)|
 
 変換後のテキスト比較
 
